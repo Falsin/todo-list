@@ -1,6 +1,8 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+ /*  border: solid red 1px; */
 }
 
 .size(@width, @height) {
@@ -20,10 +22,53 @@ header {
   background: blue;
   color: white;
   font-weight: 900;
-  padding: 2vmin;
 }
 
-form {
+.container {
+  padding: 2vmin;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  margin-left: auto;
+  .size(5vmin, 4.5vmin);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+nav div,
+nav div::before,
+nav div::after {
+  .size(100%, 0.6vmin);
+  background: white;
+  transition-duration: .5s;
+  transition-timing-function: linear;
+}
+
+/* nav div {
+  position: relative;
+} */
+
+nav div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+}
+
+nav div::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+}
+
+nav div.active {
+  &::before {
+    top: 1.95vmin;
+  }
+  &::after {
+    bottom: 1.95vmin;
+  }
+
 }

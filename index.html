@@ -8,43 +8,18 @@
   <title>Document</title>
 </head>
 <body>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : 'v9.0',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v9.0'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v9.0&appId=3819991034723751&autoLogAppEvents=1" nonce="TBgPbD0u"></script>
-
-  <div id="container">
-    <header>
+  <header>
+    <div class="container">
       <p>TODO</p>
-    </header>
-    <div id="login">
-      <form>
-
-
-      </form>
+      <nav><div class="menu"></div></nav>
     </div>
-    <footer></footer>
-  </div>
+  </header>
+
+  <div class="content"></div>
+
+  <footer></footer>
+
 
   <script src="main.js"></script>
 
