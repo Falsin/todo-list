@@ -1,5 +1,6 @@
 const nav = document.querySelector('nav');
 
 nav.onclick = () => {
-  nav.firstChild.classList.toggle('active');
+  nav.classList.toggle('active');
+  //nav.firstChild.classList.toggle('active');
 }

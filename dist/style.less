@@ -32,10 +32,12 @@ header {
 
 nav {
   margin-left: auto;
-  .size(5vmin, 4.5vmin);
+  .size(4.5vmin, 4.5vmin);
   position: relative;
   display: flex;
   align-items: center;
+  transition-duration: .3s;
+  transition-timing-function: linear;
 }
 
 nav div,
@@ -43,13 +45,9 @@ nav div::before,
 nav div::after {
   .size(100%, 0.6vmin);
   background: white;
-  transition-duration: .5s;
+  transition-duration: .3s;
   transition-timing-function: linear;
 }
-
-/* nav div {
-  position: relative;
-} */
 
 nav div::before {
   content: "";
@@ -63,12 +61,15 @@ nav div::after {
   bottom: 0;
 }
 
-nav div.active {
-  &::before {
-    top: 1.95vmin;
+nav.active {
+  transform: rotate(45deg);
+  & div {
+    &::before {
+      top: 1.95vmin;
+    }
+    &::after {
+      transform: rotate(90deg);
+      top: 1.95vmin;
+    }
   }
-  &::after {
-    bottom: 1.95vmin;
-  }
-
 }
