@@ -10,6 +10,6 @@
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-eval("const nav = document.querySelector('nav');\n\nnav.onclick = () => nav.classList.toggle('active');\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("const nav = document.querySelector('nav');\nconst menuBlock = document.querySelector('.menuBlock');\n\nnav.onclick = () => {\n  nav.classList.toggle('active');\n  menuBlock.classList.toggle('active');\n}\n\nconst section = document.querySelector('.section');\n\nconsole.dir(section)\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 /******/ })()
 ;
