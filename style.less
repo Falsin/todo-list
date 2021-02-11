@@ -2,7 +2,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
- /*  border: solid red 1px; */
 }
 
 .size(@width, @height) {
@@ -32,7 +31,7 @@ header {
 
 nav {
   margin-left: auto;
-  .size(4.5vmin, 4.5vmin);
+  .size(6vmin, 6vmin);
   position: relative;
   display: flex;
   align-items: center;
@@ -43,7 +42,7 @@ nav {
 nav div,
 nav div::before,
 nav div::after {
-  .size(100%, 0.6vmin);
+  .size(100%, 0.8vmin);
   background: white;
   transition-duration: .3s;
   transition-timing-function: linear;
@@ -65,11 +64,11 @@ nav.active {
   transform: rotate(45deg);
   & div {
     &::before {
-      top: 1.95vmin;
+      top: 2.6vmin;
     }
     &::after {
       transform: rotate(90deg);
-      top: 1.95vmin;
+      top: 2.6vmin;
     }
   }
 }
