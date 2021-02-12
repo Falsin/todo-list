@@ -191,6 +191,50 @@ li.active {
   flex-direction: column;
 }
 
+.priority {
+  border: solid red 1px;
+  display: flex;
+  align-items: center;
+}
+
+.priority input {
+  display: none;
+}
+
+.points .checkbox {
+  display: inline-block;
+  .size(16px; 16px);
+  border-radius: 50%;
+  margin-left: 2vmin;
+  position: relative;
+
+  &[for*='usual'] {
+    margin-left: 3vmin;
+    background: gray;
+  }
+
+  &[for*='important'] {
+    background: orange;
+  }
+
+  &[for*='mostImportant'] {
+    background: red;
+  }
+}
+
+.priority #usual:checked ~ [for*="usual"]::after,
+.priority #important:checked ~ [for*="important"]::after,
+.priority #mostImportant:checked ~ [for*="mostImportant"]::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  .size(10px; 10px);
+  background: rgb(62, 62, 255);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 footer {
   grid-row-start: 2;
   grid-row-end: 4;
