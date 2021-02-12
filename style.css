@@ -108,8 +108,67 @@ nav.active div::after {
 li.active {
   background: rgba(112, 120, 126, 0.349);
 }
+.section {
+  display: none;
+  flex-direction: column;
+}
+.section,
+.section * {
+  border: solid red 1px;
+}
+.section.active {
+  display: flex;
+}
+.taskBlock {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background: rgba(98, 0, 255, 0.473);
+  display: none;
+}
+.taskBlock.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#window {
+  position: relative;
+  border: solid red 1px;
+  height: 70vmin;
+  width: 80vmin;
+}
+#window .headline {
+  height: 20%;
+  width: 100%;
+  background: rgba(128, 128, 128, 0.692);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#window .cancel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 15px;
+  width: 15px;
+  background: red;
+  border: none;
+  outline: none;
+}
+.points {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.points > div:not(:last-of-type) {
+  display: flex;
+  flex-direction: column;
+}
 footer {
-  grid-row-start: 3;
+  grid-row-start: 2;
   grid-row-end: 4;
   grid-column-start: 1;
   grid-column-end: 3;
