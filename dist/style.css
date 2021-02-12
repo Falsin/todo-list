@@ -167,6 +167,45 @@ li.active {
   display: flex;
   flex-direction: column;
 }
+.priority {
+  border: solid red 1px;
+  display: flex;
+  align-items: center;
+}
+.priority input {
+  display: none;
+}
+.points .checkbox {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  margin-left: 2vmin;
+  position: relative;
+}
+.points .checkbox[for*='usual'] {
+  margin-left: 3vmin;
+  background: gray;
+}
+.points .checkbox[for*='important'] {
+  background: orange;
+}
+.points .checkbox[for*='mostImportant'] {
+  background: red;
+}
+.priority #usual:checked ~ [for*="usual"]::after,
+.priority #important:checked ~ [for*="important"]::after,
+.priority #mostImportant:checked ~ [for*="mostImportant"]::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  background: #3e3eff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 footer {
   grid-row-start: 2;
   grid-row-end: 4;
