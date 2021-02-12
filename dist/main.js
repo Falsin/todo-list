@@ -10,6 +10,6 @@
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-eval("const nav = document.querySelector('nav');\nconst menuBlock = document.querySelector('.menuBlock');\n\nnav.onclick = () => {\n  nav.classList.toggle('active');\n  menuBlock.classList.toggle('active');\n}\n\nconst section = document.querySelector('.section');\n\nconsole.dir(section)\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("const nav = document.querySelector('nav');\nconst menuBlock = document.querySelector('.menuBlock');\nconst items = menuBlock.querySelectorAll('li');\n\nnav.onclick = () => {\n  nav.classList.toggle('active');\n  menuBlock.classList.toggle('active');\n}\n\nconst section = document.querySelectorAll('.section');\nconst taskBtn = document.querySelectorAll('.addTask');\nconst taskBlock = document.querySelector('.taskBlock');\nconst cancelBtn = document.querySelector('.cancel');\n\nitems.forEach((item, id) => {\n  item.addEventListener('mousedown', () => {\n    for (let i = 0; i < items.length; i++) {\n      items[i].classList.remove('active');\n      section[i].classList.remove('active');\n    }\n    item.classList.add('active');\n    section[id].classList.add('active');\n  })\n})\n\ntaskBtn.forEach(item => {\n  item.addEventListener('mousedown', () => {\n    taskBlock.classList.add('active');\n  })\n});\n\ncancelBtn.addEventListener('mousedown', () => {\n  taskBlock.classList.remove('active');\n})\n\n/* class Task {\n  constructor() {\n\n  }\n} */\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 /******/ })()
 ;
