@@ -158,7 +158,7 @@ li.active {
 #window {
   position: relative;
   border: solid red 1px;
-  .size(80vmin, 70vmin)
+  .size(80vmin, 90vmin)
 }
 
 #window .headline {
@@ -169,7 +169,7 @@ li.active {
   align-items: center;
 }
 
-#window .cancel {
+/* #window .cancel {
   position: absolute;
   top: 0;
   right: 0;
@@ -177,10 +177,10 @@ li.active {
   background: red;
   border: none;
   outline: none;
-}
+} */
 
 .points {
-  .size(100%, 80%);
+  .size(100%, 70%);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -233,6 +233,15 @@ li.active {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.buttons {
+  .size(100%, 10%);
+  display: flex;
+}
+
+.buttons button {
+  .size(50%, 100%)
 }
 
 footer {

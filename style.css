@@ -135,7 +135,7 @@ li.active {
 #window {
   position: relative;
   border: solid red 1px;
-  height: 70vmin;
+  height: 90vmin;
   width: 80vmin;
 }
 #window .headline {
@@ -146,18 +146,17 @@ li.active {
   justify-content: center;
   align-items: center;
 }
-#window .cancel {
+/* #window .cancel {
   position: absolute;
   top: 0;
   right: 0;
-  height: 15px;
-  width: 15px;
+  .size(15px, 15px);
   background: red;
   border: none;
   outline: none;
-}
+} */
 .points {
-  height: 80%;
+  height: 70%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -205,6 +204,15 @@ li.active {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.buttons {
+  height: 10%;
+  width: 100%;
+  display: flex;
+}
+.buttons button {
+  height: 100%;
+  width: 50%;
 }
 footer {
   grid-row-start: 2;
