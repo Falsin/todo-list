@@ -15,7 +15,10 @@ class CreateTask {
   setPriority(elem) {
     const priority = elem.querySelector('.priority');
     const requiredElem = priority.querySelector('input:checked');
-    this.priority = requiredElem.id;
+    Object.defineProperty(this, 'priority', {
+      value: `${requiredElem.id}`,
+      enumerable: false
+    })
   }
 }
 

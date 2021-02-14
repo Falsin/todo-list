@@ -47,20 +47,26 @@ addBtn.addEventListener('mousedown', () => {
   obj.setPriority(taskBlock);
 
   taskBlock.classList.remove('active');
+  const priority = taskBlock.querySelector('.priority');
+  const inputs = priority.querySelectorAll('.checkbox');
+  
+  fields.forEach(item => {
+    item.value = '';
+    inputs[1].checked = true;
+  })
 
   const id = addBtn.getAttribute('data-id');
   const field = section[id].querySelector('.taskList');
 
-  addTaskToScreen(field, obj)
+  addTaskToScreen(field, obj);
+
 })
 
 function addTaskToScreen(parentElem, obj) {
   const branch = parentElem.querySelector(`.${obj.priority}`);
+  const elem = createELem(branch, 'div', 'class:bodyTask');
 
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const elem = createELem(branch, 'div');
-      elem.textContent = `${key}:  ${obj[key]}`
-    }
+    const item = createELem(elem, 'div', `class:${key}`, `${obj[key]}`);
   }
 }
