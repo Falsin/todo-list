@@ -214,6 +214,10 @@ li.active {
   height: 100%;
   width: 50%;
 }
+.taskList > div {
+  border: solid red 1px;
+  margin-top: 3vmin;
+}
 footer {
   grid-row-start: 2;
   grid-row-end: 4;

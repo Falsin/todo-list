@@ -1,3 +1,6 @@
+import {createELem} from './createElem'
+import {CreateTask} from './createTask'
+
 const nav = document.querySelector('nav');
 const menuBlock = document.querySelector('.menuBlock');
 const items = menuBlock.querySelectorAll('li');
@@ -25,9 +28,10 @@ items.forEach((item, id) => {
   })
 })
 
-taskBtn.forEach(item => {
+taskBtn.forEach((item, id) => {
   item.addEventListener('mousedown', () => {
     taskBlock.classList.add('active');
+    addBtn.setAttribute('data-id', `${id}`)
   })
 });
 
@@ -38,42 +42,25 @@ cancelBtn.addEventListener('mousedown', () => {
 let array = [];
 
 addBtn.addEventListener('mousedown', () => {
-  let obj = new Task();
-  obj.iterateArray(fields);
+  let obj = new CreateTask();
+  obj.iterateArray(fields, array); 
+  obj.setPriority(taskBlock);
 
-  array.push(obj);
+  taskBlock.classList.remove('active');
 
-  obj = JSON.stringify(array[array.length - 1]);
-  localStorage.setItem('first', obj);
+  const id = addBtn.getAttribute('data-id');
+  const field = section[id].querySelector('.taskList');
+
+  addTaskToScreen(field, obj)
 })
 
+function addTaskToScreen(parentElem, obj) {
+  const branch = parentElem.querySelector(`.${obj.priority}`);
 
-class Task {
-  constructor() {}
-  iterateArray(array) {
-    array.forEach(item => this[item.id] = item.value);
-  }
-  iterateObj(obj) {
-    for (const key in obj) {
-      this[key] = obj[key];
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const elem = createELem(branch, 'div');
+      elem.textContent = `${key}:  ${obj[key]}`
     }
   }
-} 
-
-function getObj() {
-  let obj = JSON.parse(localStorage.getItem('first'));
-  let newTask = new Task();
-  newTask.iterateObj(obj);
-  return newTask;
 }
-
-
-/* addBtn.addEventListener('mousedown', () => {
-  array.push(new Task(fields));
-})
-
-class Task {
-  constructor(array) {
-    array.forEach(item => this[item.id] = item.value);
-  }
-} */
