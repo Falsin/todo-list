@@ -31,21 +31,36 @@
     <div class="section inbox active">
       <h2>Inbox</h2>
       <div class="tasks">
-        <button data-type="inbox" class="addTask">Add task</button>
+        <button data-id="0" class="addTask">Add task</button>
+        <div class="taskList">
+          <div class="mostImportant"></div>
+          <div class="important"></div>
+          <div class="usual"></div>
+        </div>
       </div>
     </div>
 
     <div class="section today">
       <h2>Today</h2>
       <div class="tasks">
-        <button data-type="today" class="addTask">Add task</button>
+        <button data-id="1" class="addTask">Add task</button>
+        <div class="taskList">
+          <div class="mostImportant"></div>
+          <div class="important"></div>
+          <div class="usual"></div>
+        </div>
       </div>
     </div>
 
     <div class="section month">
       <h2>This month</h2>
       <div class="tasks">
-        <button data-type="month" class="addTask">Add task</button>
+        <button data-id="2" class="addTask">Add task</button>
+        <div class="taskList">
+          <div class="mostImportant"></div>
+          <div class="important"></div>
+          <div class="usual"></div>
+        </div>
       </div>
     </div>
 
@@ -53,7 +68,6 @@
 
   <div class="taskBlock">
     <div id="window">
-      <!-- <button class="cancel"></button> -->
       <div class="headline">
         <h2>Add new task</h2>
       </div>
