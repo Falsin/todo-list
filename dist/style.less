@@ -93,7 +93,6 @@ nav.active {
 .menuBlock {
   //.size(100%, 100%);
   background: rgba(110, 190, 255, 0.534);
-  border: solid red 1px;
   display: none;
 }
 
@@ -132,9 +131,9 @@ li.active {
   flex-direction: column;
 }
 
-.section, .section * {
+/* .section, .section * {
   border: solid red 1px;
-}
+} */
 
 .section.active {
   display: flex;
@@ -192,7 +191,6 @@ li.active {
 }
 
 .priority {
-  border: solid red 1px;
   display: flex;
   align-items: center;
 }
@@ -245,14 +243,54 @@ li.active {
 }
 
 .taskList > div {
-  border: solid red 1px;
   margin-top: 3vmin;
 }
 
+.headline {
+  background: gray;
+  padding: 2vmin;
+  color: white;
+  position: relative;
+}
+
+.headline::after {
+  content: "";
+  background-image: url('./images/downArrow.svg');
+  background-position: center center;
+  background-size: contain;
+  position: absolute;
+  .size(6vmin, 6vmin);
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 3vmin;
+  cursor: pointer;
+}
+
+.headline.active::after {
+  background-image: url('./images/topArrow.svg');
+}
+
 .bodyTask {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
+  background: rgb(255, 0, 76);
+}
+
+.bodyTask.active {
+  display: flex;
+}
+
+.bodyTask:not(:last-of-type) {
+  border-bottom: solid black 1px;
+}
+
+.bodyTask > div {
+  padding: 1vmin;
+}
+
+.bodyTask .dueDate {
+  margin-right: 2vmin;
 }
 
 .bodyTask .description {

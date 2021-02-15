@@ -48,11 +48,11 @@ addBtn.addEventListener('mousedown', () => {
 
   taskBlock.classList.remove('active');
   const priority = taskBlock.querySelector('.priority');
-  const inputs = priority.querySelectorAll('.checkbox');
+  const inputs = priority.querySelectorAll('input');
   
   fields.forEach(item => {
     item.value = '';
-    inputs[1].checked = true;
+    inputs[0].checked = true;
   })
 
   const id = addBtn.getAttribute('data-id');
@@ -70,3 +70,18 @@ function addTaskToScreen(parentElem, obj) {
     const item = createELem(elem, 'div', `class:${key}`, `${obj[key]}`);
   }
 }
+
+const headline = document.querySelectorAll('.headline');
+
+headline.forEach((item, id) => {
+  item.addEventListener('mousedown', () => {
+    const parentElem = item.parentNode;
+    const tasks = parentElem.querySelectorAll('.bodyTask');
+    console.log(tasks)
+
+    if (tasks.length) {
+      tasks.forEach(item => item.classList.toggle('active'));
+      item.classList.toggle('active');
+    }
+  })
+})
