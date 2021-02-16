@@ -35,6 +35,7 @@ function createTaskSceleton(parentElem, array) {
   taskBlocks.forEach((elem, id) => {
     const headline = createELem(elem, 'div', 'class:headline');
     createELem(headline, 'h3', `${array[id].headlineText}`);
+    const taskBody = createELem(elem, 'div', 'class:taskBody');
   });
 }
 

@@ -72,13 +72,28 @@ function addTaskToScreen(parentElem, obj) {
   }
 }*/
 
-/* addBtn.addEventListener('mousedown', () => {
+addBtn.addEventListener('mousedown', () => {
+  const taskObj = {}
 
+  const priorityField = document.querySelector('.priority');
+  const currentPriority = priorityField.querySelector('input:checked').id;
+  fields.forEach(item => taskObj[item.id] = item.value);
+  taskObj.priority = currentPriority;
+
+
+  const currentField = section[addBtn.getAttribute('data-id')];
+  const requiredBlock = currentField.querySelector(`.${currentPriority}`);
+
+  //addTaskToScreen(requiredBlock, taskObj)
 })
- */
-const headline = document.querySelectorAll('.headline');
 
-headline.forEach((item, id) => {
+/* function addTaskToScreen(parentElem, obj) {
+  for (const key in obj) {
+
+  }
+}
+ */
+/* headline.forEach((item, id) => {
   item.addEventListener('mousedown', () => {
     const parentElem = item.parentNode;
     const tasks = parentElem.querySelectorAll('.bodyTask');
@@ -88,7 +103,7 @@ headline.forEach((item, id) => {
       item.classList.toggle('active');
     }
   })
-})
+}) */
 
 window.onload = () => {
   createTask(list);
