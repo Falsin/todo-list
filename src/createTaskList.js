@@ -1,55 +1,41 @@
 import {createELem} from './createElem'
 
-const list = document.querySelectorAll('taskList')
+function createTask(parentElem) {
+  const array = []
 
-class CreateSection {
-  constructor(parentElem, className) {
-    this.elem = createELem(parentElem, 'div', `class:${className}`);
-  }
+  parentElem.forEach(item => {
+    createTaskSceleton(item, [new MostImportant(item), new Important(item), new Usual(item)])
+  })
 }
 
-const important = new CreateSection(list[0], 'important');
-
-const usual = new CreateSection(list[0], 'usual');
-
-const mostImportant = new CreateSection(list[0], 'mostImportant')
-
-const createTaskList = ((parentElem) => {
-  const array = [important, usual, mostImportant];
-
-  function addTaskListSections(parentElem, className) {
-    array.push(new CreateSection(parentElem, `$class:${className}`))
-  }
-
-  return {array, addTaskListSections}
-})()
-
-const task = createTaskList;
-
-/* const list = document.querySelectorAll('.tasks')
-
-const createTaskList = ((parentElem) => {
-  const array = [important, usual, mostImportant];
-
-  function addTaskListSections(parentElem, className) {
-    array.push(new CreateSection(parentElem, `$class:${className}`))
-  }
-
-  return {array, addTaskListSections}
-})()
-
-class CreateSection {
-  constructor(parentElem, className) {
-    this.elem = createELem(parentElem, 'div', `class:${className}`);
+class MostImportant {
+  constructor(parentElem) {
+    this.section = createELem(parentElem, 'div', `class:mostImportant`);
   }
 }
+MostImportant.prototype.headlineText = 'Most important deals';
 
-const important = new CreateSection(list[0], 'important');
+class Important {
+  constructor(parentElem) {
+    this.section = createELem(parentElem, 'div', `class:important`);
+  }
+}
+Important.prototype.headlineText = 'Important deals';
 
-const usual = new CreateSection(list[0], 'usual');
+class Usual {
+  constructor(parentElem) {
+    this.section = createELem(parentElem, 'div', `class:usual`);
+  }
+}
+Usual.prototype.headlineText = 'Usual deals';
 
-const mostImportant = new CreateSection(list[0], 'mostImportant')
+function createTaskSceleton(parentElem, array) {
+  const taskBlocks = [...parentElem.children];
 
-const task = createTaskList;
+  taskBlocks.forEach((elem, id) => {
+    const headline = createELem(elem, 'div', 'class:headline');
+    createELem(headline, 'h3', `${array[id].headlineText}`);
+  });
+}
 
-console.log(task) */
+export {createTask}

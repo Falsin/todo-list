@@ -1,5 +1,6 @@
 import {createELem} from './createElem'
-import {CreateTask} from './createTask'
+//import {CreateTask} from './createTask'
+import {createTask} from './createTaskList'
 
 const nav = document.querySelector('nav');
 const menuBlock = document.querySelector('.menuBlock');
@@ -16,6 +17,7 @@ const taskBlock = document.querySelector('.taskBlock');
 const cancelBtn = document.querySelector('.cancel');
 const addBtn  = document.querySelector('.add');
 const fields = document.querySelectorAll('.field');
+const list = document.querySelectorAll('.taskList');
 
 items.forEach((item, id) => {
   item.addEventListener('mousedown', () => {
@@ -38,7 +40,7 @@ taskBtn.forEach((item, id) => {
 cancelBtn.addEventListener('mousedown', () => {
   taskBlock.classList.remove('active');
 })
-
+/*
 let array = [];
 
 addBtn.addEventListener('mousedown', () => {
@@ -59,7 +61,6 @@ addBtn.addEventListener('mousedown', () => {
   const field = section[id].querySelector('.taskList');
 
   addTaskToScreen(field, obj);
-
 })
 
 function addTaskToScreen(parentElem, obj) {
@@ -69,15 +70,18 @@ function addTaskToScreen(parentElem, obj) {
   for (const key in obj) {
     const item = createELem(elem, 'div', `class:${key}`, `${obj[key]}`);
   }
-}
+}*/
 
+/* addBtn.addEventListener('mousedown', () => {
+
+})
+ */
 const headline = document.querySelectorAll('.headline');
 
 headline.forEach((item, id) => {
   item.addEventListener('mousedown', () => {
     const parentElem = item.parentNode;
     const tasks = parentElem.querySelectorAll('.bodyTask');
-    console.log(tasks)
 
     if (tasks.length) {
       tasks.forEach(item => item.classList.toggle('active'));
@@ -85,3 +89,7 @@ headline.forEach((item, id) => {
     }
   })
 })
+
+window.onload = () => {
+  createTask(list);
+}
