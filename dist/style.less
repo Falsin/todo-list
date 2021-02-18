@@ -270,47 +270,38 @@ li.active {
   background-image: url('./images/topArrow.svg');
 }
 
-/* .taskList {
-  display: none;
-}
-
-.taskList.active {
-  display: flex;
-} */
-
-/* .bodyTask {
+.taskBody {
   display: none;
   flex-direction: column;
-  align-items: center;
   background: rgb(255, 0, 76);
+  //align-items: center;
 }
 
-.bodyTask.active {
+.taskBody.active {
   display: flex;
 }
 
-.bodyTask:not(:last-of-type) {
+.taskBody > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.taskBody > div:not(:last-of-type) {
   border-bottom: solid black 1px;
 }
 
-.bodyTask > div {
-  padding: 1vmin;
-}
-
-.bodyTask .dueDate {
-  margin-right: 2vmin;
-}
-
-.bodyTask .description {
-  width: 100%;
+.taskBody .description {
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.bodyTask div:last-of-type {
+.taskBody .dueDate {
   margin-left: auto;
-} */
+  margin-right: 2vmin;
+}
 
 footer {
   grid-row-start: 2;

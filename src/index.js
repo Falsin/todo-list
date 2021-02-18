@@ -1,6 +1,5 @@
 import {createELem} from './createElem'
-//import {CreateTask} from './createTask'
-import {createTask} from './createTaskList'
+import {CreateTask, MostImportant, Important, Usual} from './createTaskList'
 
 const nav = document.querySelector('nav');
 const menuBlock = document.querySelector('.menuBlock');
@@ -40,37 +39,6 @@ taskBtn.forEach((item, id) => {
 cancelBtn.addEventListener('mousedown', () => {
   taskBlock.classList.remove('active');
 })
-/*
-let array = [];
-
-addBtn.addEventListener('mousedown', () => {
-  let obj = new CreateTask();
-  obj.iterateArray(fields, array); 
-  obj.setPriority(taskBlock);
-
-  taskBlock.classList.remove('active');
-  const priority = taskBlock.querySelector('.priority');
-  const inputs = priority.querySelectorAll('input');
-  
-  fields.forEach(item => {
-    item.value = '';
-    inputs[0].checked = true;
-  })
-
-  const id = addBtn.getAttribute('data-id');
-  const field = section[id].querySelector('.taskList');
-
-  addTaskToScreen(field, obj);
-})
-
-function addTaskToScreen(parentElem, obj) {
-  const branch = parentElem.querySelector(`.${obj.priority}`);
-  const elem = createELem(branch, 'div', 'class:bodyTask');
-
-  for (const key in obj) {
-    const item = createELem(elem, 'div', `class:${key}`, `${obj[key]}`);
-  }
-}*/
 
 addBtn.addEventListener('mousedown', () => {
   const taskObj = {}
@@ -78,33 +46,52 @@ addBtn.addEventListener('mousedown', () => {
   const priorityField = document.querySelector('.priority');
   const currentPriority = priorityField.querySelector('input:checked').id;
   fields.forEach(item => taskObj[item.id] = item.value);
-  taskObj.priority = currentPriority;
-
+  Object.defineProperty(taskObj, 'priority', {
+    value: `${currentPriority}`,
+    enumerable: false
+  })
 
   const currentField = section[addBtn.getAttribute('data-id')];
   const requiredBlock = currentField.querySelector(`.${currentPriority}`);
 
-  //addTaskToScreen(requiredBlock, taskObj)
+  addTaskToScreen(requiredBlock, taskObj);
+  taskBlock.classList.remove('active');
 })
 
-/* function addTaskToScreen(parentElem, obj) {
-  for (const key in obj) {
+function addTaskToScreen(parentElem, obj) {
+  const taskBody = parentElem.querySelector('.taskBody');
+  const taskCard = createELem(taskBody, 'div');
 
+  for (const key in obj) {
+    createELem(taskCard, 'div', `class:${key}`, `${obj[key]}`);
   }
 }
- */
-/* headline.forEach((item, id) => {
-  item.addEventListener('mousedown', () => {
-    const parentElem = item.parentNode;
-    const tasks = parentElem.querySelectorAll('.bodyTask');
 
-    if (tasks.length) {
-      tasks.forEach(item => item.classList.toggle('active'));
-      item.classList.toggle('active');
-    }
-  })
-}) */
 
+
+// доделать   //
 window.onload = () => {
-  createTask(list);
+  list.forEach(item => {
+    const taskBlocks = new CreateTask([
+      new MostImportant(item), 
+      new Important(item), 
+      new Usual(item)
+    ])
+
+    for (let i = 0; i < taskBlocks.array.length; i++) {
+      taskBlocks.addNewTask(taskBlocks.array[i])
+    }
+    /* const taskBlocks = new CreateTask(list, 
+      [
+        new MostImportant(item), 
+        new Important(item), 
+        new Usual(item)
+      ]); */
+    console.log(taskBlocks);
+
+
+/*     for (let i = 0; i < taskBlocks.array; i++) {
+      taskBlocks.addNewTask(, taskBlocks.array[i])
+    } */
+  })
 }
