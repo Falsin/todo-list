@@ -32,7 +32,9 @@ header {
 }
 
 header .container {
-  .size(100%, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  .size(90%, 100%);
   display: flex;
   align-items: center;
   padding: 0 3vmin;
@@ -91,7 +93,6 @@ nav.active {
 }
 
 .menuBlock {
-  //.size(100%, 100%);
   background: rgba(110, 190, 255, 0.534);
   display: none;
 }
@@ -101,9 +102,12 @@ nav.active {
 }
 
 .menuBlock .container {
+  margin-left: auto;
+  margin-right: auto;
   flex-direction: column;
   display: flex;
   height: auto;
+  width: 90%;
 }
 
 .menuBlock ul {
@@ -116,13 +120,17 @@ nav.active {
   align-items: center;
 }
 
-.menuBlock li img {
+.menuBlock .sectionsList li:last-of-type {
+  padding: 2vmin;
+}
+
+.menuBlock .sectionsList li img {
   .size(auto, 70%);
   margin-right: 2vmin;
   margin-left: 2vmin;
 }
 
-li.active {
+ul li.active {
   background: rgba(112, 120, 126, 0.349);
 }
 
@@ -131,9 +139,32 @@ li.active {
   flex-direction: column;
 }
 
-/* .section, .section * {
-  border: solid red 1px;
-} */
+.menuBlock .container > button {
+  display: none;
+}
+
+.menuBlock .container > button.active {
+  display: flex;
+}
+
+#projectWindow {
+  display: none;
+}
+
+#projectWindow.active {
+  display: flex;
+  flex-direction: column;
+}
+
+#projectWindow .buttons {
+  margin-top: 2vmin;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#projectWindow button {
+  width: 40%;
+}
 
 .section.active {
   display: flex;
@@ -167,16 +198,6 @@ li.active {
   justify-content: center;
   align-items: center;
 }
-
-/* #window .cancel {
-  position: absolute;
-  top: 0;
-  right: 0;
-  .size(15px, 15px);
-  background: red;
-  border: none;
-  outline: none;
-} */
 
 .points {
   .size(100%, 70%);
@@ -233,12 +254,12 @@ li.active {
   transform: translate(-50%, -50%);
 }
 
-.buttons {
+.taskBlock .buttons {
   .size(100%, 10%);
   display: flex;
 }
 
-.buttons button {
+.taskBlock .buttons button {
   .size(50%, 100%)
 }
 
@@ -274,7 +295,6 @@ li.active {
   display: none;
   flex-direction: column;
   background: rgb(255, 0, 76);
-  //align-items: center;
 }
 
 .taskBody.active {

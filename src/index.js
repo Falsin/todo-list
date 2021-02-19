@@ -1,9 +1,11 @@
-import {createELem} from './createElem'
+//import {createELem} from './createElem'
 import {CreateTask, MostImportant, Important, Usual} from './createTaskList'
+import {addTaskToScreen} from './addTaskToScreen'
+import {createProject} from './createProject'
 
 const nav = document.querySelector('nav');
 const menuBlock = document.querySelector('.menuBlock');
-const items = menuBlock.querySelectorAll('li');
+const items = [...menuBlock.querySelectorAll('li')];
 
 nav.onclick = () => {
   nav.classList.toggle('active');
@@ -58,15 +60,6 @@ addBtn.addEventListener('mousedown', () => {
   taskBlock.classList.remove('active');
 })
 
-function addTaskToScreen(parentElem, obj) {
-  const taskBody = parentElem.querySelector('.taskBody');
-  const taskCard = createELem(taskBody, 'div');
-
-  for (const key in obj) {
-    createELem(taskCard, 'div', `class:${key}`, `${obj[key]}`);
-  }
-}
-
 const cache = {};
 
 window.onload = () => {
@@ -82,4 +75,26 @@ window.onload = () => {
       taskBlocks.addNewTask(taskBlocks.array[i])
     }
   })
+}
+
+
+const projectWindow = document.getElementById('projectWindow');
+const addProjectButton = menuBlock.querySelector('.addBtn');
+
+addProjectButton.onclick = () => setClasses();
+
+const addProject = menuBlock.querySelector('.addProject');
+const cancelProjectBtn = menuBlock.querySelector('.cancelProject');
+
+addProject.onclick = () => {
+  setClasses();
+  createProject(menuBlock, items);
+  setClasses();
+}
+
+cancelProjectBtn.onclick = () => setClasses();
+
+function setClasses() {
+  addProjectButton.classList.toggle("active");
+  projectWindow.classList.toggle("active");
 }

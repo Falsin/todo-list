@@ -36,7 +36,10 @@ function createTaskSceleton(objWithTask) {
   createELem(headline, 'h3', `${objWithTask.headlineText}`);
   const taskBody = createELem(objWithTask.section, 'div', 'class:taskBody');
 
-  headline.onclick = () => taskBody.classList.toggle('active');
+  headline.onclick = () => {
+    headline.classList.toggle('active');
+    taskBody.classList.toggle('active');
+  }
 }
 
 export  {CreateTask, MostImportant, Important, Usual}
