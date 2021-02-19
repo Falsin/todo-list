@@ -1,22 +1,12 @@
 import {createELem} from './createElem'
 
-/* function createTask(parentElem) {
-  const array = []
-
-  parentElem.forEach(item => {
-    createTaskSceleton(item, [new MostImportant(item), new Important(item), new Usual(item)])
-  })
-} */
-
-export class CreateTask {
+class CreateTask {
   constructor(array) {
     this.array = array
   }
 
-  addNewTask(parentElem, priorities) {
-    parentElem.forEach(item => {
-      createTaskSceleton(item, priorities);
-    })
+  addNewTask(objWithTask) {
+    createTaskSceleton(objWithTask);
   }
 }
 
@@ -41,21 +31,12 @@ class Usual {
 }
 Usual.prototype.headlineText = 'Usual deals';
 
-function createTaskSceleton(parentElem) {
+function createTaskSceleton(objWithTask) {
+  const headline = createELem(objWithTask.section, 'div', 'class:headline');
+  createELem(headline, 'h3', `${objWithTask.headlineText}`);
+  const taskBody = createELem(objWithTask.section, 'div', 'class:taskBody');
 
+  headline.onclick = () => taskBody.classList.toggle('active');
 }
 
-/* function createTaskSceleton(parentElem, array) {
-  console.log('hello!')
-  const taskBlocks = [...parentElem.children];
-
-  taskBlocks.forEach((elem, id) => {
-    const headline = createELem(elem, 'div', 'class:headline');
-    createELem(headline, 'h3', `${array[id].headlineText}`);
-    const taskBody = createELem(elem, 'div', 'class:taskBody');
-
-    headline.onclick = () => taskBody.classList.toggle('active');
-  });
-} */
-
-export  {MostImportant, Important, Usual}
+export  {CreateTask, MostImportant, Important, Usual}

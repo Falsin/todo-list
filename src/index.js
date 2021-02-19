@@ -67,31 +67,19 @@ function addTaskToScreen(parentElem, obj) {
   }
 }
 
+const cache = {};
 
-
-// доделать   //
 window.onload = () => {
-  list.forEach(item => {
+  list.forEach((item, id) => {
     const taskBlocks = new CreateTask([
       new MostImportant(item), 
       new Important(item), 
-      new Usual(item)
+      new Usual(item),
     ])
+    cache[section[id].classList[1]] = taskBlocks;
 
     for (let i = 0; i < taskBlocks.array.length; i++) {
       taskBlocks.addNewTask(taskBlocks.array[i])
     }
-    /* const taskBlocks = new CreateTask(list, 
-      [
-        new MostImportant(item), 
-        new Important(item), 
-        new Usual(item)
-      ]); */
-    console.log(taskBlocks);
-
-
-/*     for (let i = 0; i < taskBlocks.array; i++) {
-      taskBlocks.addNewTask(, taskBlocks.array[i])
-    } */
   })
 }
