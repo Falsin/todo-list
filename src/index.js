@@ -1,7 +1,7 @@
-//import {createELem} from './createElem'
 import {CreateTask, MostImportant, Important, Usual} from './createTaskList'
 import {addTaskToScreen} from './addTaskToScreen'
 import {createProject} from './createProject'
+import {createSection} from './createSection'
 
 const nav = document.querySelector('nav');
 const menuBlock = document.querySelector('.menuBlock');
@@ -12,6 +12,7 @@ nav.onclick = () => {
   menuBlock.classList.toggle('active');
 }
 
+const content = document.querySelector('.content');
 const section = document.querySelectorAll('.section');
 const taskBtn = document.querySelectorAll('.addTask');
 const taskBlock = document.querySelector('.taskBlock');
@@ -75,8 +76,8 @@ window.onload = () => {
       taskBlocks.addNewTask(taskBlocks.array[i])
     }
   })
+  items.forEach(value => createSection(content, value))
 }
-
 
 const projectWindow = document.getElementById('projectWindow');
 const addProjectButton = menuBlock.querySelector('.addBtn');
@@ -88,7 +89,7 @@ const cancelProjectBtn = menuBlock.querySelector('.cancelProject');
 
 addProject.onclick = () => {
   setClasses();
-  createProject(menuBlock, items);
+  createProject(content, items);
   setClasses();
 }
 

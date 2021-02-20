@@ -14,8 +14,6 @@ function createProject(parentElem, items) {
       item.classList.add('active');
     })
   })
-
-  //console.log(position);
 }
 
 export {createProject}
