@@ -1,7 +1,8 @@
 import {CreateTask, MostImportant, Important, Usual} from './createTaskList'
 import {addTaskToScreen} from './addTaskToScreen'
 import {createProject} from './createProject'
-import {createSection} from './createSection'
+import {createSection, setActiveClass} from './createSection'
+import { createELem } from './createElem';
 
 const nav = document.querySelector('nav');
 const menuBlock = document.querySelector('.menuBlock');
@@ -13,31 +14,10 @@ nav.onclick = () => {
 }
 
 const content = document.querySelector('.content');
-const section = document.querySelectorAll('.section');
-const taskBtn = document.querySelectorAll('.addTask');
 const taskBlock = document.querySelector('.taskBlock');
 const cancelBtn = document.querySelector('.cancel');
 const addBtn  = document.querySelector('.add');
 const fields = document.querySelectorAll('.field');
-const list = document.querySelectorAll('.taskList');
-
-items.forEach((item, id) => {
-  item.addEventListener('mousedown', () => {
-    for (let i = 0; i < items.length; i++) {
-      items[i].classList.remove('active');
-      section[i].classList.remove('active');
-    }
-    item.classList.add('active');
-    section[id].classList.add('active');
-  })
-})
-
-taskBtn.forEach((item, id) => {
-  item.addEventListener('mousedown', () => {
-    taskBlock.classList.add('active');
-    addBtn.setAttribute('data-id', `${id}`)
-  })
-});
 
 cancelBtn.addEventListener('mousedown', () => {
   taskBlock.classList.remove('active');
@@ -45,7 +25,6 @@ cancelBtn.addEventListener('mousedown', () => {
 
 addBtn.addEventListener('mousedown', () => {
   const taskObj = {}
-
   const priorityField = document.querySelector('.priority');
   const currentPriority = priorityField.querySelector('input:checked').id;
   fields.forEach(item => taskObj[item.id] = item.value);
@@ -61,23 +40,45 @@ addBtn.addEventListener('mousedown', () => {
   taskBlock.classList.remove('active');
 })
 
+let store;
 const cache = {};
 
-window.onload = () => {
-  list.forEach((item, id) => {
-    const taskBlocks = new CreateTask([
-      new MostImportant(item), 
-      new Important(item), 
-      new Usual(item),
-    ])
-    cache[section[id].classList[1]] = taskBlocks;
+items.forEach((value, id) => {
+  store = createSection(content, value, id);
+})
 
-    for (let i = 0; i < taskBlocks.array.length; i++) {
-      taskBlocks.addNewTask(taskBlocks.array[i])
+store.taskListStore.forEach((elem, id) => {
+  const taskBlocks = new CreateTask([
+    new MostImportant(elem), 
+    new Important(elem), 
+    new Usual(elem),
+  ])
+
+  for (const iterator of taskBlocks.array) {
+    elem.appendChild(iterator.section);	
+    taskBlocks.addNewTask(iterator)
+  }
+});
+
+items.forEach((item, id) => {
+  item.addEventListener('mousedown', () => {
+    for (let i = 0; i < items.length; i++) {
+      items[i].classList.remove('active');
+      store.sectionStore[i].classList.remove('active');
     }
+    item.classList.add('active');
+    store.sectionStore[id].classList.add('active');
   })
-  items.forEach(value => createSection(content, value))
-}
+})
+
+const taskBtn = document.querySelectorAll('.addTask');
+
+taskBtn.forEach((item, id) => {
+  item.addEventListener('mousedown', () => {
+    taskBlock.classList.add('active');
+    addBtn.setAttribute('data-id', `${id}`)
+  })
+});
 
 const projectWindow = document.getElementById('projectWindow');
 const addProjectButton = menuBlock.querySelector('.addBtn');
