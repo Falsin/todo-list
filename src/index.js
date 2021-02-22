@@ -1,8 +1,9 @@
 import {CreateTask, MostImportant, Important, Usual} from './createTaskList'
 import {addTaskToScreen} from './addTaskToScreen'
 import {createProject} from './createProject'
-import {createSection, setActiveClass} from './createSection'
-import { createELem } from './createElem';
+import {createSection} from './createSection'
+import {format} from 'date-fns'
+//import { createELem } from './createElem';
 
 const nav = document.querySelector('nav');
 const menuBlock = document.querySelector('.menuBlock');
@@ -27,7 +28,14 @@ addBtn.addEventListener('mousedown', () => {
   const taskObj = {}
   const priorityField = document.querySelector('.priority');
   const currentPriority = priorityField.querySelector('input:checked').id;
-  fields.forEach(item => taskObj[item.id] = item.value);
+  fields.forEach(item => {
+    if (item.id == 'dueDate') {
+      taskObj[item.id] = format(new Date(item.value), 'd MMM Y');
+      console.log(taskObj[item.id])
+    } else {
+      taskObj[item.id] = item.value;
+    }
+  })
   Object.defineProperty(taskObj, 'priority', {
     value: `${currentPriority}`,
     enumerable: false
@@ -101,6 +109,12 @@ addProject.onclick = () => {
     items[items.length - 1].classList.add('active');
     newSection.classList.add('active');
   }
+
+  const newBtn = newSection.querySelector('.addTask');
+  newBtn.onclick = () => {
+    taskBlock.classList.add('active');
+    addBtn.setAttribute('data-id', `${id}`);
+  }
 }
 
 cancelProjectBtn.onclick = () => setClasses();
@@ -109,3 +123,5 @@ function setClasses() {
   addProjectButton.classList.toggle("active");
   projectWindow.classList.toggle("active");
 }
+
+console.log(format(new Date(), "'Today is a' eeee"))

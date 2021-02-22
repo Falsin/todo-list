@@ -2,6 +2,7 @@ import {createELem} from './createElem'
 import {createSection} from './createSection'
 import {CreateTask, MostImportant, Important, Usual} from './createTaskList'
 
+
 function createProject(parentElem, items) {
   const list = parentElem.querySelector('.projectsList');
   const projectTitle = parentElem.querySelector('input').value;
@@ -26,7 +27,9 @@ function createProject(parentElem, items) {
     new Usual(newTaskList), 
   ])
 
-  console.log(taskBlocks)
+  for (let i = 0; i < taskBlocks.array.length; i++) {
+    taskBlocks.addNewTask(taskBlocks.array[i])
+  }
 }
 
 export {createProject}
