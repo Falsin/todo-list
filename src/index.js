@@ -33,7 +33,7 @@ addBtn.addEventListener('mousedown', () => {
     enumerable: false
   })
 
-  const currentField = section[addBtn.getAttribute('data-id')];
+  const currentField = store.sectionStore[addBtn.getAttribute('data-id')];
   const requiredBlock = currentField.querySelector(`.${currentPriority}`);
 
   addTaskToScreen(requiredBlock, taskObj);
@@ -47,7 +47,7 @@ items.forEach((value, id) => {
   store = createSection(content, value, id);
 })
 
-store.taskListStore.forEach((elem, id) => {
+store.taskListStore.forEach((elem) => {
   const taskBlocks = new CreateTask([
     new MostImportant(elem), 
     new Important(elem), 
@@ -81,17 +81,26 @@ taskBtn.forEach((item, id) => {
 });
 
 const projectWindow = document.getElementById('projectWindow');
-const addProjectButton = menuBlock.querySelector('.addBtn');
+const addProjectButton = menuBlock.querySelector('.addProject');
 
 addProjectButton.onclick = () => setClasses();
 
-const addProject = menuBlock.querySelector('.addProject');
+const addProject = menuBlock.querySelector('.addBtn');
 const cancelProjectBtn = menuBlock.querySelector('.cancelProject');
 
 addProject.onclick = () => {
   setClasses();
   createProject(content, items);
-  setClasses();
+ 
+  const newSection = store.sectionStore[store.sectionStore.length - 1];
+  items[items.length - 1].onclick = () => {
+    for (let i = 0; i < items.length; i++) {
+      items[i].classList.remove('active');
+      store.sectionStore[i].classList.remove('active');
+    }
+    items[items.length - 1].classList.add('active');
+    newSection.classList.add('active');
+  }
 }
 
 cancelProjectBtn.onclick = () => setClasses();
