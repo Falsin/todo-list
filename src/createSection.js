@@ -3,6 +3,7 @@ import {createELem} from './createElem'
 const createSection = (() => {
   const sectionStore = [];
   const taskListStore = [];
+  const baseProjects = {}
 
   return function (parentElem, elem, id) {
     const currentElem = createELem(parentElem, 'div');
@@ -14,11 +15,12 @@ const createSection = (() => {
     const taskList = createELem(taskContainer, 'div', `class:taskList`);
     sectionStore.push(currentElem);
     taskListStore.push(taskList);
+    
+    baseProjects[elem.innerText] = [];
 
-    return {sectionStore, taskListStore}
+    return {sectionStore, taskListStore, baseProjects}
   }
 })()
-
 
 function setActiveClass(elem, currentElem) {
   const className = elem.classList.value;

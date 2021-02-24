@@ -31,7 +31,6 @@ addBtn.addEventListener('mousedown', () => {
   fields.forEach(item => {
     if (item.id == 'dueDate') {
       taskObj[item.id] = format(new Date(item.value), 'd MMM Y');
-      console.log(taskObj[item.id])
     } else {
       taskObj[item.id] = item.value;
     }
@@ -46,6 +45,8 @@ addBtn.addEventListener('mousedown', () => {
 
   addTaskToScreen(requiredBlock, taskObj);
   taskBlock.classList.remove('active');
+
+  console.log(store)
 })
 
 let store;
@@ -61,11 +62,32 @@ store.taskListStore.forEach((elem) => {
     new Important(elem), 
     new Usual(elem),
   ])
+  const nameSection = taskBlocks.array[0].section.parentNode.parentNode.previousSibling.textContent;
+  let array = [];
 
+  //console.log(store.baseProjects)
+  //console.log(store.baseProjects[nameSection] = store.baseProjects[nameSection].push('1'))
+  //console.log(taskBlocks.array)
+
+  //console.log(store.baseProjects[nameSection])
+
+  //console.log(store.baseProjects[nameSection] = store.baseProjects[nameSection].push('1'))
+
+/*   for (const value of taskBlocks.array) {
+    console.log(value.section.classList[0])
+  } */
+
+  //console.log(store.baseProjects[nameSection])
+//console.log(taskBlocks)
   for (const iterator of taskBlocks.array) {
     elem.appendChild(iterator.section);	
-    taskBlocks.addNewTask(iterator)
+    taskBlocks.addNewTask(iterator);
+    array.push(iterator.section.classList[0])
+    //console.log(store.baseProjects[nameSection] = store.baseProjects[nameSection].push('1'))
+    //console.log(store.baseProjects[nameSection] = store.baseProjects[nameSection].push('1'))
   }
+  store.baseProjects[nameSection] = array;
+  //console.log(array)
 });
 
 items.forEach((item, id) => {
@@ -124,4 +146,4 @@ function setClasses() {
   projectWindow.classList.toggle("active");
 }
 
-console.log(format(new Date(), "'Today is a' eeee"))
+console.log(store.baseProjects)
