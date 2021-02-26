@@ -37,7 +37,8 @@ addBtn.addEventListener('mousedown', () => {
   })
   Object.defineProperty(taskObj, 'priority', {
     value: `${currentPriority}`,
-    enumerable: false
+    enumerable: false,
+    writable: true
   })
 
   const currentField = store.sectionStore[addBtn.getAttribute('data-id')];
@@ -46,19 +47,21 @@ addBtn.addEventListener('mousedown', () => {
   addTaskToScreen(requiredBlock, taskObj);
   taskBlock.classList.remove('active');
 
-
-  const desiredSection = store.baseProjects[items[addBtn.getAttribute('data-id')].textContent];
-  for (const iterator of desiredSection) {
-    if(iterator[taskObj.priority]) {
-      iterator[taskObj.priority].push(taskObj)
-    }
-  }
-
-  localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
+  addObjIntoStorage(taskObj)
 })
 
+function addObjIntoStorage(obj) {
+  const desiredSection = store.baseProjects[items[addBtn.getAttribute('data-id')].textContent];
+  for (const iterator of desiredSection) {
+    if(iterator[obj.priority]) {
+      iterator[obj.priority].push(obj)
+      iterator[obj.priority][iterator[obj.priority].length - 1].priority = obj.priority; 
+    }
+  }
+  localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
+}
+
 let store;
-const cache = {};
 
 items.forEach((value, id) => {
   store = createSection(content, value, id);
@@ -70,8 +73,8 @@ store.taskListStore.forEach((elem, id) => {
     new Important(elem), 
     new Usual(elem),
   ])
-  const nameSection = items[id].textContent;
 
+  const nameSection = items[id].textContent;
   store.baseProjects[nameSection] = [];
 
   for (const iterator of taskBlocks.array) {
@@ -139,5 +142,32 @@ function setClasses() {
 }
 
 window.onload = () => {
-  console.log(JSON.parse(localStorage.getItem('baseProjects')));
+  const sections = document.querySelectorAll('.section');
+  const obj = JSON.parse(localStorage.getItem('baseProjects'));
+
+  for (const key in obj) {
+    const elem = document.querySelector(`[data-name="${key}"]`);
+    if (elem) {
+      recursion(obj)
+    }
+  }
+}
+
+function recursion(value) {
+  if (Array.isArray(value)) {
+    for (const iterator of value) {
+      recursion(iterator);
+    }
+  } else if (typeof value === 'object') {
+    let elements;
+    for (const key in value) {
+      elements = recursion(value[key]);
+    }
+    if (elements === null) {
+      const board = document.querySelectorAll('.mostImportant');
+      addTaskToScreen(board[0], value)
+    }  
+  } else {
+    return null;
+  }
 }
