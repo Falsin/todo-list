@@ -46,7 +46,15 @@ addBtn.addEventListener('mousedown', () => {
   addTaskToScreen(requiredBlock, taskObj);
   taskBlock.classList.remove('active');
 
-  console.log(store)
+
+  const desiredSection = store.baseProjects[items[addBtn.getAttribute('data-id')].textContent];
+  for (const iterator of desiredSection) {
+    if(iterator[taskObj.priority]) {
+      iterator[taskObj.priority].push(taskObj)
+    }
+  }
+
+  localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
 })
 
 let store;
@@ -56,38 +64,22 @@ items.forEach((value, id) => {
   store = createSection(content, value, id);
 })
 
-store.taskListStore.forEach((elem) => {
+store.taskListStore.forEach((elem, id) => {
   const taskBlocks = new CreateTask([
     new MostImportant(elem), 
     new Important(elem), 
     new Usual(elem),
   ])
-  const nameSection = taskBlocks.array[0].section.parentNode.parentNode.previousSibling.textContent;
-  let array = [];
+  const nameSection = items[id].textContent;
 
-  //console.log(store.baseProjects)
-  //console.log(store.baseProjects[nameSection] = store.baseProjects[nameSection].push('1'))
-  //console.log(taskBlocks.array)
+  store.baseProjects[nameSection] = [];
 
-  //console.log(store.baseProjects[nameSection])
-
-  //console.log(store.baseProjects[nameSection] = store.baseProjects[nameSection].push('1'))
-
-/*   for (const value of taskBlocks.array) {
-    console.log(value.section.classList[0])
-  } */
-
-  //console.log(store.baseProjects[nameSection])
-//console.log(taskBlocks)
   for (const iterator of taskBlocks.array) {
     elem.appendChild(iterator.section);	
     taskBlocks.addNewTask(iterator);
-    array.push(iterator.section.classList[0])
-    //console.log(store.baseProjects[nameSection] = store.baseProjects[nameSection].push('1'))
-    //console.log(store.baseProjects[nameSection] = store.baseProjects[nameSection].push('1'))
+    const taskPriority = iterator.section.className;
+    store.baseProjects[nameSection].push({[taskPriority]: []})
   }
-  store.baseProjects[nameSection] = array;
-  //console.log(array)
 });
 
 items.forEach((item, id) => {
@@ -146,4 +138,6 @@ function setClasses() {
   projectWindow.classList.toggle("active");
 }
 
-console.log(store.baseProjects)
+window.onload = () => {
+  console.log(JSON.parse(localStorage.getItem('baseProjects')));
+}
