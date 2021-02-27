@@ -5,7 +5,9 @@ function addTaskToScreen(parentElem, obj) {
   const taskCard = createELem(taskBody, 'div');
 
   for (const key in obj) {
-    createELem(taskCard, 'div', `class:${key}`, `${obj[key]}`);
+    if (key != 'priority') {
+      createELem(taskCard, 'div', `class:${key}`, `${obj[key]}`);
+    }
   }
 }
 

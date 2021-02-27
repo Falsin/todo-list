@@ -35,16 +35,13 @@ addBtn.addEventListener('mousedown', () => {
       taskObj[item.id] = item.value;
     }
   })
-  Object.defineProperty(taskObj, 'priority', {
-    value: `${currentPriority}`,
-    enumerable: false,
-    writable: true
-  })
+  taskObj.priority = `${currentPriority}`;
 
   const currentField = store.sectionStore[addBtn.getAttribute('data-id')];
   const requiredBlock = currentField.querySelector(`.${currentPriority}`);
 
   addTaskToScreen(requiredBlock, taskObj);
+  console.log(requiredBlock)
   taskBlock.classList.remove('active');
 
   addObjIntoStorage(taskObj)
@@ -54,10 +51,12 @@ function addObjIntoStorage(obj) {
   const desiredSection = store.baseProjects[items[addBtn.getAttribute('data-id')].textContent];
   for (const iterator of desiredSection) {
     if(iterator[obj.priority]) {
-      iterator[obj.priority].push(obj)
-      iterator[obj.priority][iterator[obj.priority].length - 1].priority = obj.priority; 
+      iterator[obj.priority].push(obj);
+      iterator[obj.priority][iterator[obj.priority].length - 1].priority = `${obj.priority}`;
     }
   }
+
+  localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
   localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
 }
 
@@ -148,26 +147,41 @@ window.onload = () => {
   for (const key in obj) {
     const elem = document.querySelector(`[data-name="${key}"]`);
     if (elem) {
-      recursion(obj)
+      recursion(elem, obj[key]);
     }
   }
 }
 
-function recursion(value) {
+function recursion(elem, value) {
   if (Array.isArray(value)) {
     for (const iterator of value) {
-      recursion(iterator);
+      recursion(elem, iterator);
     }
   } else if (typeof value === 'object') {
     let elements;
     for (const key in value) {
-      elements = recursion(value[key]);
+      elements = recursion(elem, value[key]);
     }
     if (elements === null) {
-      const board = document.querySelectorAll('.mostImportant');
-      addTaskToScreen(board[0], value)
-    }  
+      addObj(elem, value)
+    } 
   } else {
     return null;
   }
+}
+
+function addObj(elem, value) {
+    const id = items.indexOf(elem);
+    const desiredSection = store.sectionStore[id];
+
+    const desiredPriority = desiredSection.querySelector(`.${value.priority}`);
+    addTaskToScreen(desiredPriority, value);
+
+
+    const sectionArray = store.baseProjects[elem.textContent];
+    for (const iterator of sectionArray) {
+      if (iterator[value.priority]) {
+        iterator[value.priority].push(value);
+      }
+    }
 }
