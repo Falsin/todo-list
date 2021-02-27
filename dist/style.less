@@ -265,6 +265,7 @@ ul li.active {
 
 .taskList > div {
   margin-top: 3vmin;
+  position: relative;
 }
 
 .headline {
@@ -305,6 +306,7 @@ ul li.active {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .taskBody > div:not(:last-of-type) {
@@ -329,4 +331,12 @@ footer {
   grid-column-start: 1;
   grid-column-end: 3;
   border: solid blue 1px;
+}
+
+.deleteCardBtn {
+  .size(50px, 50px);
+  background: hsla(0, 100%, 50%, 0.548);
+  position: absolute;
+  top: 0;
+  right: 0;
 }

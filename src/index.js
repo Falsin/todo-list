@@ -57,7 +57,6 @@ function addObjIntoStorage(obj) {
   }
 
   localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
-  localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
 }
 
 let store;
@@ -147,24 +146,22 @@ window.onload = () => {
   for (const key in obj) {
     const elem = document.querySelector(`[data-name="${key}"]`);
     if (elem) {
-      recursion(elem, obj[key]);
+      findObj(elem, obj[key]);
     }
   }
 }
 
-function recursion(elem, value) {
+function findObj(elem, value) {
   if (Array.isArray(value)) {
     for (const iterator of value) {
-      recursion(elem, iterator);
+      findObj(elem, iterator);
     }
   } else if (typeof value === 'object') {
     let elements;
     for (const key in value) {
-      elements = recursion(elem, value[key]);
+      elements = findObj(elem, value[key]);
     }
-    if (elements === null) {
-      addObj(elem, value)
-    } 
+    if (elements === null) addObj(elem, value);
   } else {
     return null;
   }
@@ -177,7 +174,6 @@ function addObj(elem, value) {
     const desiredPriority = desiredSection.querySelector(`.${value.priority}`);
     addTaskToScreen(desiredPriority, value);
 
-
     const sectionArray = store.baseProjects[elem.textContent];
     for (const iterator of sectionArray) {
       if (iterator[value.priority]) {
@@ -185,3 +181,5 @@ function addObj(elem, value) {
       }
     }
 }
+
+export {store, addObjIntoStorage}
