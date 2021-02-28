@@ -3,7 +3,7 @@ import {addTaskToScreen} from './addTaskToScreen'
 import {createProject} from './createProject'
 import {createSection} from './createSection'
 import {format} from 'date-fns'
-//import { createELem } from './createElem';
+import { createELem } from './createElem';
 
 const nav = document.querySelector('nav');
 const menuBlock = document.querySelector('.menuBlock');
@@ -41,7 +41,6 @@ addBtn.addEventListener('mousedown', () => {
   const requiredBlock = currentField.querySelector(`.${currentPriority}`);
 
   addTaskToScreen(requiredBlock, taskObj);
-  console.log(requiredBlock)
   taskBlock.classList.remove('active');
 
   addObjIntoStorage(taskObj)
@@ -55,8 +54,9 @@ function addObjIntoStorage(obj) {
       iterator[obj.priority][iterator[obj.priority].length - 1].priority = `${obj.priority}`;
     }
   }
-
+  //console.log(store)
   localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
+  //console.log(localStorage.getItem('baseProjects'))
 }
 
 let store;
@@ -65,7 +65,9 @@ items.forEach((value, id) => {
   store = createSection(content, value, id);
 })
 
-store.taskListStore.forEach((elem, id) => {
+store.taskListStore.forEach((elem, id) => addObjIntoBaseProjects(elem, id));
+
+function addObjIntoBaseProjects(elem, id) {
   const taskBlocks = new CreateTask([
     new MostImportant(elem), 
     new Important(elem), 
@@ -81,9 +83,11 @@ store.taskListStore.forEach((elem, id) => {
     const taskPriority = iterator.section.className;
     store.baseProjects[nameSection].push({[taskPriority]: []})
   }
-});
+}
 
-items.forEach((item, id) => {
+items.forEach((item, id) => showSection(item, id))
+
+function showSection(item, id) {
   item.addEventListener('mousedown', () => {
     for (let i = 0; i < items.length; i++) {
       items[i].classList.remove('active');
@@ -92,16 +96,7 @@ items.forEach((item, id) => {
     item.classList.add('active');
     store.sectionStore[id].classList.add('active');
   })
-})
-
-const taskBtn = document.querySelectorAll('.addTask');
-
-taskBtn.forEach((item, id) => {
-  item.addEventListener('mousedown', () => {
-    taskBlock.classList.add('active');
-    addBtn.setAttribute('data-id', `${id}`)
-  })
-});
+}
 
 const projectWindow = document.getElementById('projectWindow');
 const addProjectButton = menuBlock.querySelector('.addProject');
@@ -116,20 +111,16 @@ addProject.onclick = () => {
   createProject(content, items);
  
   const newSection = store.sectionStore[store.sectionStore.length - 1];
-  items[items.length - 1].onclick = () => {
-    for (let i = 0; i < items.length; i++) {
-      items[i].classList.remove('active');
-      store.sectionStore[i].classList.remove('active');
-    }
-    items[items.length - 1].classList.add('active');
-    newSection.classList.add('active');
-  }
+
+  showSection(items[items.length - 1], items.length - 1)
 
   const newBtn = newSection.querySelector('.addTask');
   newBtn.onclick = () => {
     taskBlock.classList.add('active');
     addBtn.setAttribute('data-id', `${id}`);
   }
+
+  localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
 }
 
 cancelProjectBtn.onclick = () => setClasses();
@@ -147,7 +138,9 @@ window.onload = () => {
     const elem = document.querySelector(`[data-name="${key}"]`);
     if (elem) {
       findObj(elem, obj[key]);
-    }
+    } else { 
+      createProject(content, items, key);
+      findObj(items[items.length - 1], obj[key]);
   }
 }
 
@@ -182,4 +175,4 @@ function addObj(elem, value) {
     }
 }
 
-export {store, addObjIntoStorage}
+export {store, addObjIntoStorage, addObjIntoBaseProjects, showSection/* , showTaskBlock, taskBtn */}

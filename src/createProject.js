@@ -1,11 +1,16 @@
 import {createELem} from './createElem'
 import {createSection} from './createSection'
-import {CreateTask, MostImportant, Important, Usual} from './createTaskList'
+import {addObjIntoBaseProjects, showSection} from './index'
 
 
-function createProject(parentElem, items) {
+function createProject(parentElem, items, title) {
   const list = parentElem.querySelector('.projectsList');
-  const projectTitle = parentElem.querySelector('input').value;
+  let projectTitle = parentElem.querySelector('input').value;
+
+  if (!projectTitle) {
+    projectTitle = title;
+  }
+
   const position = createELem(list, 'li', `${projectTitle}`);
   items.push(position);
 
@@ -21,15 +26,9 @@ function createProject(parentElem, items) {
   const objWithTasks = createSection(parentElem, position, items.length - 1);
   const newTaskList = objWithTasks.taskListStore[objWithTasks.taskListStore.length - 1];
   
-  const taskBlocks = new CreateTask([
-    new MostImportant(newTaskList),
-    new Important(newTaskList),
-    new Usual(newTaskList), 
-  ])
+  addObjIntoBaseProjects(newTaskList, items.length - 1);
 
-  for (let i = 0; i < taskBlocks.array.length; i++) {
-    taskBlocks.addNewTask(taskBlocks.array[i])
-  }
+  showSection(position, items.length - 1)
 }
 
 export {createProject}
