@@ -17,8 +17,7 @@ const createSection = (() => {
     const taskContainer = createELem(currentElem, 'div', `class:tasks`);
     const btn = createELem(taskContainer, 'button', `Add task`, `data-id:${id}`, 'class:addTask');
     taskBtn.push(btn);
-    //console.log(taskBtn)
-
+    
     showTaskBlock(btn, taskBtn.length - 1)
 
     const taskList = createELem(taskContainer, 'div', `class:taskList`);

@@ -11,8 +11,11 @@ function createProject(parentElem, items, title) {
     projectTitle = title;
   }
 
-  const position = createELem(list, 'li', `${projectTitle}`);
+  const position = createELem(list, 'li');
+  createELem(position, 'span', `${projectTitle}`);
   items.push(position);
+
+  const deleteProjectBtn = createELem(position, 'div', `class:deleteProjectBtn`);
 
   items.forEach((item) => {
     item.addEventListener('mousedown', () => {
@@ -29,6 +32,21 @@ function createProject(parentElem, items, title) {
   addObjIntoBaseProjects(newTaskList, items.length - 1);
 
   showSection(position, items.length - 1)
+
+  deleteProjectBtn.onclick = () => deleteProject(position, objWithTasks);
+}
+
+function deleteProject(elem, obj) {
+  elem.remove();
+  obj.sectionStore[obj.sectionStore.length-1].remove();
+
+  delete obj.baseProjects[elem.textContent];
+  obj.sectionStore.splice(obj.sectionStore.length-1, 1);
+  obj.taskListStore.splice(obj.sectionStore.length-1, 1);
+
+  localStorage.setItem('baseProjects', JSON.stringify(obj.baseProjects));
+
+  console.log(obj)
 }
 
 export {createProject}

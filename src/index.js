@@ -3,7 +3,6 @@ import {addTaskToScreen} from './addTaskToScreen'
 import {createProject} from './createProject'
 import {createSection} from './createSection'
 import {format} from 'date-fns'
-import { createELem } from './createElem';
 
 const nav = document.querySelector('nav');
 const menuBlock = document.querySelector('.menuBlock');
@@ -54,9 +53,8 @@ function addObjIntoStorage(obj) {
       iterator[obj.priority][iterator[obj.priority].length - 1].priority = `${obj.priority}`;
     }
   }
-  //console.log(store)
+
   localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
-  //console.log(localStorage.getItem('baseProjects'))
 }
 
 let store;
@@ -141,6 +139,7 @@ window.onload = () => {
     } else { 
       createProject(content, items, key);
       findObj(items[items.length - 1], obj[key]);
+    }
   }
 }
 
@@ -173,6 +172,7 @@ function addObj(elem, value) {
         iterator[value.priority].push(value);
       }
     }
+    console.log(store)
 }
 
-export {store, addObjIntoStorage, addObjIntoBaseProjects, showSection/* , showTaskBlock, taskBtn */}
+export {store, addObjIntoStorage, addObjIntoBaseProjects, showSection}
