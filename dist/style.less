@@ -95,6 +95,7 @@ nav.active {
 .menuBlock {
   background: rgba(110, 190, 255, 0.534);
   display: none;
+  padding-bottom: 3vmin;
 }
 
 .menuBlock.active {
@@ -120,15 +121,37 @@ nav.active {
   align-items: center;
 }
 
-.menuBlock .sectionsList li:last-of-type {
-  padding: 2vmin;
+.menuBlock .sectionsList li div {
+  .size(9vmin, 9vmin);
+  display: flex;
+  margin-right: 2vmin;
 }
 
-.menuBlock .sectionsList li img {
-  .size(auto, 70%);
-  margin-right: 2vmin;
-  margin-left: 2vmin;
+.menuBlock .sectionsList li div {
+  background-position: center center;
+  background-size: contain;
 }
+
+.menuBlock .sectionsList li:first-of-type div {
+  background-image: url('./images/inbox.svg');
+}
+
+.menuBlock .sectionsList li:nth-of-type(2) div {
+  background-image: url('./images/calendarEvent.svg');
+}
+
+.menuBlock .sectionsList li:last-of-type div {
+  background-image: url('./images/monthly-calendar-svgrepo-com (1).svg');
+}
+
+
+
+/* .menuBlock .sectionsList li div img {
+  flex-grow: 1;
+  .size(100%, 100%);
+} */
+
+
 
 ul li.active {
   background: rgba(112, 126, 125, 0.527);
@@ -168,6 +191,18 @@ ul li:hover {
 
 #projectWindow button {
   width: 40%;
+  padding: 2vmin;
+  border-radius: 2vmin;
+  border: none;
+  outline: none;
+}
+
+.addBtn {
+  background: green;
+}
+
+.cancelProject {
+  background: red;
 }
 
 .section.active {
@@ -355,4 +390,25 @@ footer {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.addProject {
+  margin-top: 2vmin;
+  margin-bottom: 2vmin;
+  align-items: center;
+  align-self: flex-start;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.addProject img {
+  .size(auto, 26px);
+  margin-right: 2vmin;
+}
+
+.addTask {
+  background: none;
+  outline: none;
+  border: none;
 }
