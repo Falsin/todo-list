@@ -103,6 +103,10 @@ nav.active div::after {
   width: 100%;
   display: flex;
   align-items: center;
+  padding-left: 2vmin;
+}
+.menuBlock h3 {
+  margin-top: 2vmin;
 }
 .menuBlock .sectionsList li div {
   height: 9vmin;
@@ -123,10 +127,14 @@ nav.active div::after {
 .menuBlock .sectionsList li:last-of-type div {
   background-image: url('images/monthly-calendar-svgrepo-com (1).svg');
 }
-/* .menuBlock .sectionsList li div img {
-  flex-grow: 1;
-  .size(100%, 100%);
-} */
+.sectionsList li {
+  border-radius: 10px;
+  margin-top: 2vmin;
+}
+.section > h2,
+.section .tasks > button {
+  padding-left: 2vmin;
+}
 ul li.active {
   background: rgba(112, 126, 125, 0.527);
 }
@@ -162,6 +170,9 @@ ul li:hover {
   border: none;
   outline: none;
 }
+#projectWindow input {
+  padding: 2vmin;
+}
 .addBtn {
   background: green;
 }
@@ -178,6 +189,7 @@ ul li:hover {
   grid-column-end: 3;
   background: rgba(98, 0, 255, 0.473);
   display: none;
+  z-index: 2;
 }
 .taskBlock.active {
   display: flex;
@@ -186,17 +198,19 @@ ul li:hover {
 }
 #window {
   position: relative;
-  border: solid red 1px;
-  height: 90vmin;
+  border: solid rgba(66, 66, 66, 0.89) 1px;
   width: 80vmin;
+  border-radius: 10px;
 }
 #window .headline {
   height: 20%;
   width: 100%;
-  background: rgba(128, 128, 128, 0.692);
+  background: rgba(66, 66, 66, 0.692);
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 .points {
   height: 70%;
@@ -204,14 +218,20 @@ ul li:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding-left: 2vmin;
+  padding-right: 2vmin;
 }
 .points > div:not(:last-of-type) {
   display: flex;
   flex-direction: column;
 }
+.points > div {
+  margin-top: 3vmin;
+}
 .priority {
   display: flex;
   align-items: center;
+  margin-bottom: 3vmin;
 }
 .priority input {
   display: none;
@@ -226,7 +246,7 @@ ul li:hover {
 }
 .points .checkbox[for*='usual'] {
   margin-left: 3vmin;
-  background: gray;
+  background: #a0a0a0;
 }
 .points .checkbox[for*='important'] {
   background: orange;
@@ -255,6 +275,18 @@ ul li:hover {
 .taskBlock .buttons button {
   height: 100%;
   width: 50%;
+  border: none;
+  padding: 3vmin;
+  color: white;
+  font-weight: 900;
+}
+.add {
+  border-bottom-left-radius: 10px;
+  background: green;
+}
+.cancel {
+  border-bottom-right-radius: 10px;
+  background: red;
 }
 .taskList > div {
   margin-top: 3vmin;
@@ -266,7 +298,7 @@ ul li:hover {
   color: white;
   position: relative;
 }
-.headline::after {
+.taskList .headline::after {
   content: "";
   background-image: url('images/downArrow.svg');
   background-position: center center;
@@ -310,7 +342,7 @@ ul li:hover {
   margin-right: 2vmin;
 }
 footer {
-  grid-row-start: 2;
+  grid-row-start: 3;
   grid-row-end: 4;
   grid-column-start: 1;
   grid-column-end: 3;
@@ -326,14 +358,26 @@ footer {
 }
 .projectsList li {
   position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
 }
 .deleteProjectBtn {
   height: 30px;
   width: 30px;
-  background: hsla(0, 100%, 50%, 0.548);
   position: absolute;
-  top: 0;
+  top: 50%;
   right: 0;
+  transform: translate(0, -50%);
+  display: none;
+  align-items: center;
+}
+.projectsList li.active .deleteProjectBtn {
+  display: flex;
+}
+.deleteProjectBtn img {
+  height: 80%;
+  width: 80%;
 }
 .addProject {
   margin-top: 2vmin;
@@ -353,4 +397,28 @@ footer {
   background: none;
   outline: none;
   border: none;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 10vmin;
+  align-items: center;
+}
+.addTask img {
+  height: 70%;
+  width: auto;
+}
+.field {
+  padding: 2vmin;
+  margin-top: 1vmin;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+.mostImportant .taskBody > div {
+  background: #ff004c;
+}
+.important .taskBody > div {
+  background: orange;
+}
+.usual .taskBody > div {
+  background: #a0a0a0;
 }

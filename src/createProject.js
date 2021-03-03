@@ -16,6 +16,8 @@ function createProject(parentElem, items, title) {
   items.push(position);
 
   const deleteProjectBtn = createELem(position, 'div', `class:deleteProjectBtn`);
+  const img = createELem(deleteProjectBtn, 'img');
+  img.src = './images/cancelBtn.svg'
 
   items.forEach((item) => {
     item.addEventListener('mousedown', () => {
@@ -46,7 +48,7 @@ function deleteProject(elem, obj) {
 
   localStorage.setItem('baseProjects', JSON.stringify(obj.baseProjects));
 
-  console.log(obj)
+  console.log(obj);
 }
 
 export {createProject}

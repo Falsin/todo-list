@@ -16,7 +16,8 @@ const createSection = (() => {
 
     const taskContainer = createELem(currentElem, 'div', `class:tasks`);
     const btn = createELem(taskContainer, 'button', `Add task`, `data-id:${id}`, 'class:addTask');
-    //createELem(btn, 'img');
+    const img = createELem(btn, 'img');
+    img.src = './images/plus.svg'
     taskBtn.push(btn);
     
     showTaskBlock(btn, taskBtn.length - 1)

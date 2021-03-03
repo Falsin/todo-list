@@ -172,7 +172,6 @@ function addObj(elem, value) {
         iterator[value.priority].push(value);
       }
     }
-    console.log(store)
 }
 
 export {store, addObjIntoStorage, addObjIntoBaseProjects, showSection}
