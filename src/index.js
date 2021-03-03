@@ -37,6 +37,9 @@ addBtn.addEventListener('mousedown', () => {
   taskObj.priority = `${currentPriority}`;
 
   const currentField = store.sectionStore[addBtn.getAttribute('data-id')];
+
+  console.log(addBtn.getAttribute('data-id'))
+  console.log(currentField)
   const requiredBlock = currentField.querySelector(`.${currentPriority}`);
 
   addTaskToScreen(requiredBlock, taskObj);
@@ -87,12 +90,15 @@ items.forEach((item, id) => showSection(item, id))
 
 function showSection(item, id) {
   item.addEventListener('mousedown', () => {
+    const index = items.indexOf(item);
     for (let i = 0; i < items.length; i++) {
       items[i].classList.remove('active');
-      store.sectionStore[i].classList.remove('active');
+      if (store.sectionStore[i]) {
+        store.sectionStore[i].classList.remove('active');
+      }
     }
     item.classList.add('active');
-    store.sectionStore[id].classList.add('active');
+    store.sectionStore[index].classList.add('active');
   })
 }
 

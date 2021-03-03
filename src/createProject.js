@@ -1,3 +1,4 @@
+import { set } from 'date-fns';
 import {createELem} from './createElem'
 import {createSection} from './createSection'
 import {addObjIntoBaseProjects, showSection} from './index'
@@ -35,20 +36,27 @@ function createProject(parentElem, items, title) {
 
   showSection(position, items.length - 1)
 
-  deleteProjectBtn.onclick = () => deleteProject(position, objWithTasks);
+  deleteProjectBtn.onclick = () => deleteProject(position, objWithTasks, items);
+
+  localStorage.setItem('baseProjects', JSON.stringify(objWithTasks.baseProjects));
 }
 
-function deleteProject(elem, obj) {
-  elem.remove();
-  obj.sectionStore[obj.sectionStore.length-1].remove();
+function deleteProject(elem, obj, items) {
+  const index = items.indexOf(elem);
 
+  elem.remove();  
+  obj.sectionStore[index].remove();
+  obj.sectionStore.splice(index, 1);
+  obj.taskListStore.splice(index, 1)
+
+  items.splice(index, 1);
   delete obj.baseProjects[elem.textContent];
-  obj.sectionStore.splice(obj.sectionStore.length-1, 1);
-  obj.taskListStore.splice(obj.sectionStore.length-1, 1);
 
+  obj.sectionStore.forEach((item, id) => {
+    const addTasksBtn = item.querySelector('.addTask');
+    addTasksBtn.dataset.id = `${id}`;
+  })
   localStorage.setItem('baseProjects', JSON.stringify(obj.baseProjects));
-
-  console.log(obj);
 }
 
 export {createProject}
