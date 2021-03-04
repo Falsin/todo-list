@@ -12,7 +12,7 @@ body {
   font-size: 16px;
   display: grid;
   grid-template-columns: 0.5fr 1.5fr;
-  grid-template-rows: 12vmin auto 5vmin;
+  grid-template-rows: 12vmin 2fr 0.2fr;
 }
 header {
   background: blue;
@@ -187,9 +187,10 @@ ul li:hover {
   grid-row-end: 4;
   grid-column-start: 1;
   grid-column-end: 3;
-  background: rgba(98, 0, 255, 0.473);
+  background: rgba(44, 0, 116, 0.856);
   display: none;
   z-index: 2;
+  color: white;
 }
 .taskBlock.active {
   display: flex;
@@ -205,7 +206,7 @@ ul li:hover {
 #window .headline {
   height: 20%;
   width: 100%;
-  background: rgba(66, 66, 66, 0.692);
+  background: #424242;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -227,6 +228,9 @@ ul li:hover {
 }
 .points > div {
   margin-top: 3vmin;
+}
+.points > div .invalidValue {
+  color: red;
 }
 .priority {
   display: flex;
@@ -342,15 +346,20 @@ ul li:hover {
   margin-right: 2vmin;
 }
 footer {
+  display: flex;
   grid-row-start: 3;
   grid-row-end: 4;
   grid-column-start: 1;
   grid-column-end: 3;
   border: solid blue 1px;
   background-color: hsl(216, 28%, 7%);
+  padding: 2vmin;
+  align-items: center;
+  justify-content: center;
 }
 footer a {
   color: white;
+  text-decoration: none;
 }
 .deleteCardBtn {
   height: 50%;
@@ -416,12 +425,21 @@ footer a {
   height: 70%;
   width: auto;
 }
-.field {
+.points > div:first-of-type .field,
+.points > div:nth-of-type(2) .field {
   padding: 2vmin;
   margin-top: 1vmin;
   border-radius: 10px;
   border: none;
   outline: none;
+}
+.points > div:nth-of-type(3) .field {
+  padding: 2vmin 2% 2vmin 2%;
+  margin-top: 1vmin;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 50%;
 }
 .mostImportant .taskBody > div {
   background: #ff004c;
