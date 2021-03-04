@@ -3,9 +3,19 @@ import {store} from './index'
 
 function addTaskToScreen(parentElem, obj) {
   const taskBody = parentElem.querySelector('.taskBody');
-  const taskCard = createELem(taskBody, 'div');
-  const deleteCardBtn = createELem(taskCard, 'div', 'class:deleteCardBtn');
+  const taskCard = createELem(taskBody, 'div', 'class:taskCard');
 
+  taskCard.addEventListener('mousedown', () => {
+    const taskCardsArray = parentElem.querySelectorAll('.taskCard');
+    taskCardsArray.forEach(elem => {
+      elem.classList.remove('active');
+    });
+    taskCard.classList.add('active');
+  })
+
+  //const deleteCardBtn = createELem(taskCard, 'div', 'class:deleteCardBtn');
+  const deleteCardBtn = createELem(taskCard, 'img', 'class:deleteCardBtn');
+  deleteCardBtn.src = './images/cancelBtn.svg';
   for (const key in obj) {
     if (key != 'priority') {
       createELem(taskCard, 'div', `class:${key}`, `${obj[key]}`);
@@ -13,7 +23,6 @@ function addTaskToScreen(parentElem, obj) {
   }
 
   deleteCardBtn.onclick = () => deleteCard(deleteCardBtn, obj, taskCard)
-  
 }
 
 function deleteCard(btn, obj, taskCard) {

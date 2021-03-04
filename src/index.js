@@ -37,9 +37,6 @@ addBtn.addEventListener('mousedown', () => {
   taskObj.priority = `${currentPriority}`;
 
   const currentField = store.sectionStore[addBtn.getAttribute('data-id')];
-
-  console.log(addBtn.getAttribute('data-id'))
-  console.log(currentField)
   const requiredBlock = currentField.querySelector(`.${currentPriority}`);
 
   addTaskToScreen(requiredBlock, taskObj);
@@ -119,10 +116,12 @@ addProject.onclick = () => {
   showSection(items[items.length - 1], items.length - 1)
 
   const newBtn = newSection.querySelector('.addTask');
-  newBtn.onclick = () => {
+
+  newBtn.addEventListener('mousedown', () => {
+    const index = newBtn.getAttribute('data-id');
     taskBlock.classList.add('active');
-    addBtn.setAttribute('data-id', `${id}`);
-  }
+    addBtn.setAttribute('data-id', `${index}`);
+  })
 
   localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
 }

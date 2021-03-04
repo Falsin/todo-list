@@ -13,6 +13,7 @@ function createProject(parentElem, items, title) {
   }
 
   const position = createELem(list, 'li');
+  createELem(position, 'div', 'class:icon');
   createELem(position, 'span', `${projectTitle}`);
   items.push(position);
 
