@@ -13,7 +13,6 @@ function addTaskToScreen(parentElem, obj) {
     taskCard.classList.add('active');
   })
 
-  //const deleteCardBtn = createELem(taskCard, 'div', 'class:deleteCardBtn');
   const deleteCardBtn = createELem(taskCard, 'img', 'class:deleteCardBtn');
   deleteCardBtn.src = './images/cancelBtn.svg';
   for (const key in obj) {

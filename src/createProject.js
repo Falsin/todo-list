@@ -1,7 +1,7 @@
 import { set } from 'date-fns';
 import {createELem} from './createElem'
 import {createSection} from './createSection'
-import {addObjIntoBaseProjects, showSection} from './index'
+import {addObjIntoBaseProjects, showSection, store} from './index'
 
 
 function createProject(parentElem, items, title) {
@@ -38,8 +38,6 @@ function createProject(parentElem, items, title) {
   showSection(position, items.length - 1)
 
   deleteProjectBtn.onclick = () => deleteProject(position, objWithTasks, items);
-
-  localStorage.setItem('baseProjects', JSON.stringify(objWithTasks.baseProjects));
 }
 
 function deleteProject(elem, obj, items) {

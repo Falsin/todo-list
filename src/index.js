@@ -24,26 +24,68 @@ cancelBtn.addEventListener('mousedown', () => {
 })
 
 addBtn.addEventListener('mousedown', () => {
-  const taskObj = {}
-  const priorityField = document.querySelector('.priority');
-  const currentPriority = priorityField.querySelector('input:checked').id;
-  fields.forEach(item => {
-    if (item.id == 'dueDate') {
-      taskObj[item.id] = format(new Date(item.value), 'd MMM Y');
-    } else {
-      taskObj[item.id] = item.value;
-    }
-  })
-  taskObj.priority = `${currentPriority}`;
+  const isTrue = checkFields();
+  
+  if(isTrue) {
+    const taskObj = {}
+    const priorityField = document.querySelector('.priority');
+    const currentPriority = priorityField.querySelector('input:checked').id;
+    fields.forEach(item => {
+      if (item.id == 'dueDate') {
+        taskObj[item.id] = format(new Date(item.value), 'd MMM Y');
+      } else {
+        taskObj[item.id] = item.value;
+      }
+    })
+    taskObj.priority = `${currentPriority}`;
 
-  const currentField = store.sectionStore[addBtn.getAttribute('data-id')];
-  const requiredBlock = currentField.querySelector(`.${currentPriority}`);
+    const currentField = store.sectionStore[addBtn.getAttribute('data-id')];
+    const requiredBlock = currentField.querySelector(`.${currentPriority}`);
 
-  addTaskToScreen(requiredBlock, taskObj);
-  taskBlock.classList.remove('active');
+    addTaskToScreen(requiredBlock, taskObj);
+    taskBlock.classList.remove('active');
 
-  addObjIntoStorage(taskObj)
+    addObjIntoStorage(taskObj);
+  }
 })
+
+function checkFields() {
+  let checkArray = [];
+
+  for (let i = 0; i < fields.length; i++) {
+    checkArray.push(checkFieldValue(fields[i], i))
+  }
+
+  return !checkArray.includes(false);
+}
+
+fields.forEach((item, id) => {
+  item.addEventListener('change', () => checkFieldValue(item, id));
+})
+
+function checkFieldValue(elem, id) {
+  let checkValue = true;
+
+  if (elem.value == '') {
+    elem.previousElementSibling.classList.add('invalidValue');
+    const array = elem.previousElementSibling.textContent.split(' ');
+    elem.previousElementSibling.textContent = array[0] + ' cannot be empty';
+    checkValue = false;
+
+    if (id == 2) {
+      elem.previousElementSibling.textContent = 'Invalid date value';
+    }
+  } else {
+    const array = elem.previousElementSibling.textContent.split(' ');
+    elem.previousElementSibling.textContent = array[0];
+    elem.previousElementSibling.classList.remove('invalidValue');
+
+    if (id == 2) {
+      elem.previousElementSibling.textContent = 'Due date';
+    }
+  }
+  return checkValue;
+}
 
 function addObjIntoStorage(obj) {
   const desiredSection = store.baseProjects[items[addBtn.getAttribute('data-id')].textContent];
@@ -134,7 +176,6 @@ function setClasses() {
 }
 
 window.onload = () => {
-  const sections = document.querySelectorAll('.section');
   const obj = JSON.parse(localStorage.getItem('baseProjects'));
 
   for (const key in obj) {
