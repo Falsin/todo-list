@@ -347,14 +347,24 @@ footer {
   grid-column-start: 1;
   grid-column-end: 3;
   border: solid blue 1px;
+  background-color: hsl(216, 28%, 7%);
+}
+footer a {
+  color: white;
 }
 .deleteCardBtn {
-  height: 50px;
-  width: 50px;
-  background: hsla(0, 100%, 50%, 0.548);
+  height: 50%;
+  width: auto;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 50%;
+  right: 2vmin;
+  transform: translate(0, -50%);
+}
+.taskBody div.active .deleteCardBtn {
+  display: flex;
+}
+.taskBody .deleteCardBtn {
+  display: none;
 }
 .projectsList li {
   position: relative;
@@ -421,4 +431,21 @@ footer {
 }
 .usual .taskBody > div {
   background: #a0a0a0;
+}
+.icon {
+  height: 8vmin;
+  width: 8vmin;
+  background-image: url('images/list.svg');
+  background-position: center center;
+  background-size: contain;
+  margin-right: 2vmin;
+}
+.taskBody .deleteCardBtn {
+  display: none;
+}
+.taskCard div {
+  margin-top: 2vmin;
+}
+.taskCard {
+  padding-bottom: 1vmin;
 }
