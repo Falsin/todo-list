@@ -3,7 +3,26 @@ import {store} from './index'
 
 function addTaskToScreen(parentElem, obj) {
   const taskBody = parentElem.querySelector('.taskBody');
-  const taskCard = createELem(taskBody, 'div', 'class:taskCard');
+
+  const taskArray = taskBody.querySelectorAll('.taskCard');
+  let taskCard;
+  if (!taskArray.length) {
+    taskCard = createELem(taskBody, 'div', 'class:taskCard');
+  } else {
+    taskCard = document.createElement('div');
+    taskCard.classList.add('taskCard');
+    for (let i = 0; i < taskArray.length; i++) {
+      const objDate = Date.parse(obj.dueDate)
+      const dateString = Date.parse(taskArray[i].lastChild.textContent);
+
+      if (dateString > objDate) {
+        taskArray[i].before(taskCard);
+        break;
+      } else if (i == taskArray.length - 1 && objDate > dateString) {
+        taskArray[i].after(taskCard);
+      }
+    }
+  }
 
   taskCard.addEventListener('mousedown', () => {
     const taskCardsArray = parentElem.querySelectorAll('.taskCard');
