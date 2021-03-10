@@ -9,7 +9,7 @@ body {
   width: 100%;
 }
 body {
-  font-size: 16px;
+  font-size: 5vmin;
   display: grid;
   grid-template-columns: 0.5fr 1.5fr;
   grid-template-rows: 12vmin 2fr 0.2fr;
@@ -142,6 +142,7 @@ ul li:hover {
   background: rgba(112, 120, 126, 0.349);
 }
 .section {
+  margin-top: 2vmin;
   display: none;
   flex-direction: column;
 }
@@ -169,6 +170,7 @@ ul li:hover {
   border-radius: 2vmin;
   border: none;
   outline: none;
+  color: white;
 }
 #projectWindow input {
   padding: 2vmin;
@@ -321,6 +323,8 @@ ul li:hover {
 .taskBody {
   display: none;
   flex-direction: column;
+}
+.mostImportant .taskBody {
   background: #ff004c;
 }
 .taskBody.active {
@@ -372,6 +376,9 @@ footer a {
 .taskBody div.active .deleteCardBtn {
   display: flex;
 }
+.taskList .taskBody div.active {
+  background: hsla(0, 0%, 50%, 0.329);
+}
 .taskBody .deleteCardBtn {
   display: none;
 }
@@ -408,7 +415,7 @@ footer a {
   outline: none;
 }
 .addProject img {
-  height: 26px;
+  height: 100%;
   width: auto;
   margin-right: 2vmin;
 }
@@ -420,6 +427,7 @@ footer a {
   flex-direction: row-reverse;
   height: 10vmin;
   align-items: center;
+  font-size: 5vmin;
 }
 .addTask img {
   height: 70%;
@@ -444,10 +452,10 @@ footer a {
 .mostImportant .taskBody > div {
   background: #ff004c;
 }
-.important .taskBody > div {
+.important .taskBody {
   background: orange;
 }
-.usual .taskBody > div {
+.usual .taskBody {
   background: #a0a0a0;
 }
 .icon {
@@ -466,4 +474,118 @@ footer a {
 }
 .taskCard {
   padding-bottom: 1vmin;
+}
+@media (orientation: landscape) and (min-width: 1000px) {
+  body,
+  footer,
+  .addTask,
+  .addProject,
+  .points .checkbox,
+  .buttons * {
+    font-size: 3vmin;
+  }
+  .menuBlock .sectionsList li div {
+    height: 6vmin;
+    width: 6vmin;
+  }
+  .icon {
+    height: 6vmin;
+    width: 6vmin;
+  }
+  #window .points .field {
+    font-size: 3vmin;
+    padding: 0.5vmin;
+  }
+  .priority #usual:checked ~ [for*="usual"]::after,
+  .priority #important:checked ~ [for*="important"]::after,
+  .priority #mostImportant:checked ~ [for*="mostImportant"]::after {
+    height: 2.4vmin;
+    width: 2.4vmin;
+  }
+  .content {
+    display: flex;
+  }
+  .menuBlock {
+    display: block;
+    width: 20%;
+  }
+  .section {
+    flex-grow: 1;
+  }
+  nav {
+    display: none;
+  }
+  .deleteProjectBtn {
+    height: 5vmin;
+    width: 5vmin;
+  }
+  #projectWindow button {
+    width: 45%;
+    padding: 0.5vmin;
+  }
+  #projectWindow input {
+    font-size: 3vmin;
+    padding: 0.5vmin;
+  }
+  .deleteCardBtn {
+    height: 30%;
+    width: auto;
+  }
+}
+@media (orientation: portrait) and (min-height: 1000px) {
+  body,
+  footer,
+  .addTask,
+  .addProject,
+  .points .checkbox,
+  .buttons * {
+    font-size: 3vmin;
+  }
+  .menuBlock .sectionsList li div {
+    height: 6vmin;
+    width: 6vmin;
+  }
+  .icon {
+    height: 6vmin;
+    width: 6vmin;
+  }
+  #window .points .field {
+    font-size: 3vmin;
+    padding: 0.5vmin;
+  }
+  .priority #usual:checked ~ [for*="usual"]::after,
+  .priority #important:checked ~ [for*="important"]::after,
+  .priority #mostImportant:checked ~ [for*="mostImportant"]::after {
+    height: 2.4vmin;
+    width: 2.4vmin;
+  }
+  .content {
+    display: flex;
+  }
+  .section {
+    flex-grow: 1;
+  }
+  .menuBlock {
+    display: block;
+    width: 30%;
+  }
+  nav {
+    display: none;
+  }
+  .deleteProjectBtn {
+    height: 5vmin;
+    width: 5vmin;
+  }
+  #projectWindow button {
+    width: 45%;
+    padding: 0.5vmin;
+  }
+  #projectWindow input {
+    font-size: 3vmin;
+    padding: 0.5vmin;
+  }
+  .deleteCardBtn {
+    height: 30%;
+    width: auto;
+  }
 }
