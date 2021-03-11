@@ -5,24 +5,7 @@ function addTaskToScreen(parentElem, obj) {
   const taskBody = parentElem.querySelector('.taskBody');
 
   const taskArray = taskBody.querySelectorAll('.taskCard');
-  let taskCard;
-  if (!taskArray.length) {
-    taskCard = createELem(taskBody, 'div', 'class:taskCard');
-  } else {
-    taskCard = document.createElement('div');
-    taskCard.classList.add('taskCard');
-    for (let i = 0; i < taskArray.length; i++) {
-      const objDate = Date.parse(obj.dueDate)
-      const dateString = Date.parse(taskArray[i].lastChild.textContent);
-
-      if (dateString > objDate) {
-        taskArray[i].before(taskCard);
-        break;
-      } else if (i == taskArray.length - 1 && objDate > dateString) {
-        taskArray[i].after(taskCard);
-      }
-    }
-  }
+  let taskCard = sortTasks(taskArray, obj, taskBody);
 
   taskCard.addEventListener('mousedown', () => {
     const taskCardsArray = parentElem.querySelectorAll('.taskCard');
@@ -59,6 +42,28 @@ function deleteCard(btn, obj, taskCard) {
 
   taskCard.remove();
   localStorage.setItem('baseProjects', JSON.stringify(store.baseProjects));
+}
+
+function sortTasks(array, obj, parentElem) {
+  let elem;
+  if (!array.length) {
+    return createELem(parentElem, 'div', 'class:taskCard');
+  } else {
+    elem = document.createElement('div');
+    elem.classList.add('taskCard');
+    for (let i = 0; i < array.length; i++) {
+      const objDate = Date.parse(obj.dueDate)
+      const dateString = Date.parse(array[i].lastChild.textContent);
+
+      if (dateString > objDate) {
+        array[i].before(elem);
+        return elem;
+      } else if (i == array.length - 1 && objDate > dateString) {
+        array[i].after(elem);
+        return elem;
+      }
+    }
+  }
 }
 
 export {addTaskToScreen}
